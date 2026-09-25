@@ -4,10 +4,20 @@ const cors = require("cors");
 const connectDB = require("./config/db");
 connectDB();
 
+// access routers
+const writerRouter = require("./routes/writer.routes");
+const readerRouter = require("./routes/reader.routes");
+const adminRouter = require("./routes/admin.routes");
+
 // middlewares
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// writer routes
+app.use(writerRouter);
+app.use(readerRouter);
+app.use(adminRouter);
 
 // home route
 app.get("/", (req, res) => {
